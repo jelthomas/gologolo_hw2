@@ -6,6 +6,7 @@ import EditScreen from './components/edit_screen/EditScreen'
 import jsTPS from './transactions/jsTPS.js'
 import ChangeLogo_Transaction from './transactions/ChangeLogo_Transaction.js'
 
+
 // THESE ARE THE App SCREENS
 const AppScreen = {
   HOME_SCREEN: "HOME_SCREEN",
@@ -346,7 +347,7 @@ class App extends Component {
           changeLogoCallback={this.buildChangeLogoTransaction}  // TRANSACTION CALLBACK
           undoCallback={this.undo}                        // TRANSACTION CALLBACK                       
           canUndo={this.canUndo}                          // TRANSACTION CALLBACK
-
+          deleteLogo={this.deleteLogo}
         />;
       default:
         return <div></div>;
