@@ -24,7 +24,9 @@ export const TransactionType = {
 export const LogoDefaults = {
   TEXT : "goLogoLo Logo",
   TEXT_COLOR : "#FF0000",
-  FONT_SIZE : 24
+  FONT_SIZE : 24,
+  TEXT_BACKGROUND_COLOR : "#FFFFFF",
+  BORDER_COLOR: "#FFFFFF"
 }
 
 // App IS THE ROOT REACT COMPONENT
@@ -113,7 +115,6 @@ class App extends Component {
   goToEditScreen = (logo) => {    
     // MAKE SURE logo IS AT THE TOP OF THE RECENT WORK LIST BY REMOVING
     // IT AND THEN PREPENDING
-
     // SO FIRST REMOVE logo BY FILTERING IT OUT
     const nextLogos = this.state.logos.filter(testLogo =>
       testLogo.key !== logo.key
@@ -146,14 +147,16 @@ class App extends Component {
    * to do the actual work of changing the logo. Note that this function will also
    * then add the built transaction to the stack and execute it.
    */
-  buildChangeLogoTransaction = (oldLogo, logoKey, newText, newTextColor, newFontSize) => {
+  buildChangeLogoTransaction = (oldLogo, logoKey, newText, newTextColor, newFontSize, newTextBackgroundColor, newBorderColor) => {
     // THIS WILL BE THE LOGO AFTER THE CHANGE HAPPENS, NOTE WE BUILD
     // AN ENTIRELY NEW LOGO EACH TIME BUT IT SHOULD KEEP THE SAME KEY
     let postEditLogo = {
       key: logoKey,
       text: newText,
       textColor: newTextColor,
-      fontSize: newFontSize
+      fontSize: newFontSize,
+      backgroundColor: newTextBackgroundColor,
+      borderColor: newBorderColor
     };
 
     // NOW BUILD THE TRANSACTION OBJECT
@@ -222,7 +225,9 @@ class App extends Component {
       key: this.getHighKey(this.state.logos),
       text: LogoDefaults.TEXT,
       textColor: LogoDefaults.TEXT_COLOR,
-      fontSize: LogoDefaults.FONT_SIZE
+      fontSize: LogoDefaults.FONT_SIZE,
+      backgroundColor: LogoDefaults.TEXT_BACKGROUND_COLOR,
+      borderColor: LogoDefaults.BORDER_COLOR
     }
     return newLogo;
   }
@@ -237,7 +242,10 @@ class App extends Component {
     );
 
     console.log("size of nextLogos: " + nextLogos.length);
-
+    localStorage.clear();
+    var newLogos = JSON.stringify(nextLogos);
+    localStorage.setItem("recent_work", newLogos);
+    
     // AND SET THE STATE, WHICH SHOULD FORCE A render
     this.setState({
       logos: nextLogos
@@ -287,7 +295,6 @@ class App extends Component {
     // WILL THIS WORK? @todo
     let logosString = JSON.stringify(this.state.logos);
     localStorage.setItem("recent_work", logosString);
-
     this.goToEditScreen(this.state.currentLogo);
   }
 
