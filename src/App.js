@@ -26,7 +26,7 @@ export const LogoDefaults = {
   TEXT_COLOR : "#FF0000",
   FONT_SIZE : 24,
   TEXT_BACKGROUND_COLOR : "#FFFFFF",
-  BORDER_COLOR: "#FFFFFF"
+  BORDER_COLOR: "#000000"
 }
 
 // App IS THE ROOT REACT COMPONENT
@@ -243,8 +243,10 @@ class App extends Component {
 
     console.log("size of nextLogos: " + nextLogos.length);
     localStorage.clear();
-    var newLogos = JSON.stringify(nextLogos);
-    localStorage.setItem("recent_work", newLogos);
+    if(nextLogos.length !== 0){
+      var newLogos = JSON.stringify(nextLogos);
+      localStorage.setItem("recent_work", newLogos);
+    }
     
     // AND SET THE STATE, WHICH SHOULD FORCE A render
     this.setState({
@@ -361,7 +363,5 @@ class App extends Component {
     };
   }
 }
-
-
 
 export default App;

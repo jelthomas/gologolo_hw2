@@ -7,6 +7,7 @@ class TextEditSidebar extends Component {
         // WE'LL MANAGE THE UI CONTROL
         // VALUES HERE
         this.state = {
+            sliderDistance: 24,
             textColor : "#FF0000",
             fontSize : 24,
             backgroundColor: "#FF0000",
@@ -78,7 +79,8 @@ class TextEditSidebar extends Component {
                             <div className="col s8">
                                 <input type="range" min="4" max="144" 
                                     onChange={this.handleFontSizeChange}
-                                    value={this.props.logo.fontSize} />
+                                    value={this.props.logo.fontSize}>
+                                </input>
                             </div>
                         </div>
                         <div className="row">

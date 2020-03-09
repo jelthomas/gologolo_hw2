@@ -35,3 +35,7 @@ body {
 .delete {
   font-size: 40pt;
 }
+
+.row .col.s8{
+  overflow: auto;
+}
