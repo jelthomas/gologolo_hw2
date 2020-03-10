@@ -33,7 +33,7 @@ class Navbar extends React.Component {
           <div  className='brand-logo' 
                 style={ {cursor: "pointer"} }
                 onClick={this.handleGoHome}>
-            goLogoLo
+            Home
           </div>
           <ul id="nav-mobile" className="right hide-on-med-and-down">
             <div className = "delete" style={ {cursor: "pointer"} }

@@ -46,3 +46,19 @@ body {
   text-align: center;
   display: inline-block;
 }
+
+.createNew{
+  border-style: solid;
+  border-width: 2px;
+  border-color: black;
+  border-radius: 10pt;
+  padding: 10pt;
+  background-color: rgb(237, 184, 188);
+  color: white;
+  font-size: 20pt;
+}
+
+.col.s4.recent_work_column{
+  color: white;
+  background-color: var(--swatch-foundation);
+}

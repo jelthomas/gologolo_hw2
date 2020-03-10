@@ -92,13 +92,11 @@ class TextEditSidebar extends Component {
                     <div className="card-content white-text">
                     <Modal
                         actions={[<Button flat modal="close" node="button" waves="green">Close</Button>]}
-                        bottomSheet={false}
-                        fixedFooter={false}
                         header="Please enter the text for your logo:"
                         id="modal-0"
                         options={{
                             dismissible: true,
-                            endingTop: '10%',
+                            endingTop: '30%',
                             inDuration: 250,
                             onCloseEnd: null,
                             onCloseStart: null,
@@ -107,7 +105,7 @@ class TextEditSidebar extends Component {
                             opacity: 0.5,
                             outDuration: 250,
                             preventScrolling: true,
-                            startingTop: '4%'
+                            startingTop: '10%'
                         }}
                         trigger={<Button node="button" className="waves-effect waves-light btn-small">&#9998;</Button>}>
                         <input type="text"

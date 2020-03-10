@@ -40,7 +40,7 @@ class HomeScreen extends Component {
                         List Maker
                     </div>
                     <div>
-                        <button
+                        <button className="createNew"
                             style={{ cursor: "pointer" }}
                             onClick={this.handleAddNewLogo}>
                             Create a New Logo
