@@ -38,4 +38,11 @@ body {
 
 .row .col.s8{
   overflow: auto;
+  
+}
+
+.logo{
+  width: fit-content;
+  text-align: center;
+  display: inline-block;
 }

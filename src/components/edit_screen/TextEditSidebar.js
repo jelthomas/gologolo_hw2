@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Modal, Button } from 'react-materialize'
 
 class TextEditSidebar extends Component {
     constructor() {
@@ -12,6 +13,7 @@ class TextEditSidebar extends Component {
             fontSize : 24,
             backgroundColor: "#FF0000",
             borderColor: "#FFFFFF",
+            borderRadius: 0
         }
     }
 
@@ -21,32 +23,37 @@ class TextEditSidebar extends Component {
 
     handleTextColorChange = (event) => {
         console.log("handleTextColorChange to " + event.target.value);
-        this.setState({ textColor: event.target.value, fontSize: this.props.logo.fontSize, backgroundColor: this.props.logo.backgroundColor
-                    }, this.completeUserEditing);
+        this.setState({ textColor: event.target.value, fontSize: this.props.logo.fontSize, backgroundColor: this.props.logo.backgroundColor,
+                        borderColor: this.props.logo.borderColor, borderRadius: this.props.logo.borderRadius}, this.completeUserEditing);
     }
 
     handleFontSizeChange = (event) => {
         console.log("handleFontSizeChangeComplete to " + event.target.value);
         this.setState({ fontSize: event.target.value, textColor: this.props.logo.textColor, backgroundColor: this.props.logo.backgroundColor,
-                        borderColor: this.props.logo.borderColor}, this.completeUserEditing);
+                        borderColor: this.props.logo.borderColor, borderRadius: this.props.logo.borderRadius}, this.completeUserEditing);
+    }
+
+    handleBorderRadiusChange = (event) => {
+        console.log("handleBorderRadiusChange to " + event.target.value);
+        this.setState({ borderRadius: event.target.value, fontSize: this.props.logo.fontSize, textColor: this.props.logo.textColor, 
+                        backgroundColor: this.props.logo.backgroundColor, borderColor: this.props.logo.borderColor}, this.completeUserEditing);
     }
 
     handleBackgroundColorChange = (event) => {
         console.log("handleBackGroundColorChangeComplete to " + event.target.value);
         this.setState({ backgroundColor: event.target.value, textColor: this.props.logo.textColor, fontSize: this.props.logo.fontSize, 
-                        borderColor: this.props.logo.borderColor}, this.completeUserEditing);
+                        borderColor: this.props.logo.borderColor, borderRadius: this.props.logo.borderRadius}, this.completeUserEditing);
     }
 
     handleBorderColorChange = (event) => {
         console.log("handleBorderColorChangeComplete to " + event.target.value);
         this.setState({ borderColor: event.target.value, backgroundColor: this.props.logo.backgroundColor, textColor: this.props.logo.textColor, 
-                    fontSize: this.props.logo.fontSize 
-                    }, this.completeUserEditing);
+                    fontSize: this.props.logo.fontSize, borderRadius: this.props.logo.borderRadius}, this.completeUserEditing);
     }
 
     completeUserEditing = () => {
         console.log("completeUserEditing");
-        this.props.changeLogoCallback(this.props.logo, this.props.logo.key, this.props.logo.text, this.state.textColor, this.state.fontSize, this.state.backgroundColor, this.state.borderColor);
+        this.props.changeLogoCallback(this.props.logo, this.props.logo.key, this.props.logo.text, this.state.textColor, this.state.fontSize, this.state.backgroundColor, this.state.borderColor, this.state.borderRadius);
     }
 
     render() {
@@ -58,15 +65,39 @@ class TextEditSidebar extends Component {
             <div className="card-panel col s4">
                 <div className="card blue-grey darken-1">
                     <div className="card-content white-text">
-                        <button className="waves-effect waves-light btn-small">&#9998;</button>
+                    <Modal
+                        actions={[<Button flat modal="close" node="button" waves="green">Close</Button>]}
+                        bottomSheet={false}
+                        fixedFooter={false}
+                        header="Please enter the text for your logo:"
+                        id="modal-0"
+                        options={{
+                            dismissible: true,
+                            endingTop: '10%',
+                            inDuration: 250,
+                            onCloseEnd: null,
+                            onCloseStart: null,
+                            onOpenEnd: null,
+                            onOpenStart: null,
+                            opacity: 0.5,
+                            outDuration: 250,
+                            preventScrolling: true,
+                            startingTop: '4%'
+                        }}
+                        trigger={<Button node="button" className="waves-effect waves-light btn-small">&#9998;</Button>}>
+                        <input type="text"
+                            //onChange={this.handleTextColorChange}
+                            //value={this.props.logo.textColor}
+                        />
+                    </Modal>
+                        <span>  </span>
                         <button className={undoClass} onClick={this.handleUndo}>Undo</button>
                     </div>
                 </div>
                 <div className="card blue-grey darken-1">
                     <div className="card-content white-text">
-                        <span className="card-title">Text</span>
                         <div className="row">
-                            <div className="col s4">Color:</div>
+                            <div className="col s4">Text Color:</div>
                             <div className="col s8">
                                 <input type="color"
                                         onChange={this.handleTextColorChange}
@@ -99,6 +130,15 @@ class TextEditSidebar extends Component {
                                         onChange={this.handleBorderColorChange}
                                         value={this.props.logo.borderColor}
                                 />
+                            </div>
+                        </div>
+                        <div className="row">
+                            <div className="col s4">Border Radius:</div>
+                            <div className="col s8">
+                                <input type="range" min="0" max="200" 
+                                    onChange={this.handleBorderRadiusChange}
+                                    value={this.props.logo.borderRadius}>
+                                </input>
                             </div>
                         </div>
                     </div>
