@@ -62,3 +62,11 @@ body {
   color: white;
   background-color: var(--swatch-foundation);
 }
+
+.modalButton{
+  margin-right: 683px !important;
+}
+
+h4{
+  color: #219e92;
+}
