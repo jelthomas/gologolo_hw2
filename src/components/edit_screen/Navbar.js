@@ -1,4 +1,5 @@
 import React from 'react'
+import { Modal, Button} from 'react-materialize'
 
 class Navbar extends React.Component {
   constructor() {
@@ -36,10 +37,25 @@ class Navbar extends React.Component {
             Home
           </div>
           <ul id="nav-mobile" className="right hide-on-med-and-down">
-            <div className = "delete" style={ {cursor: "pointer"} }
-                 onClick={this.handleDelete}>
-              &#128465;
-            </div>
+            <Modal
+              actions={[<Button className="modalButton" modal="close" node="button" waves="green">No</Button>, <Button modal = "close" node="button" waves="green" onClick={this.handleDelete}>Yes</Button>]}
+              header="Are you sure you want to permanently delete this Logo?"
+              id="modal-0"
+              options={{
+                dismissible: true,
+                endingTop: '30%',
+                inDuration: 250,
+                onCloseEnd: null,
+                onCloseStart: null,
+                onOpenEnd: null,
+                onOpenStart: null,
+                opacity: 0.5,
+                outDuration: 250,
+                preventScrolling: true,
+                startingTop: '10%'
+              }}
+              trigger={<Button node="button" className="delete">&#128465;</Button>}>
+            </Modal>
           </ul>
         </div>
       </nav>

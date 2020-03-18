@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Modal, Button, Range } from 'react-materialize'
+import { Modal, Button} from 'react-materialize'
 import TextInput from 'react-materialize/lib/TextInput';
 
 class TextEditSidebar extends Component {
@@ -22,6 +22,10 @@ class TextEditSidebar extends Component {
 
     handleUndo = () => {
         this.props.undoCallback();
+    }
+
+    handleRedo = () => {
+        this.props.redoCallback();
     }
 
     handleTextChange = () => {
@@ -96,19 +100,28 @@ class TextEditSidebar extends Component {
         this.tempText = event.target.value;
         console.log(this.tempText);
     }
+  
+    handleKeyPress = (event) =>{
+        console.log(event.key)
+    }
 
 
     render() {
         let undoDisabled = !this.props.canUndo();
         let undoClass = "waves-effect waves-light btn-small";
-        if (undoDisabled)
+        if (undoDisabled){
             undoClass += " disabled";
+        }    
+        let redoDisabled = !this.props.canRedo();
+        let redoClass = "waves-effect waves-light btn-small";
+        if (redoDisabled)
+            redoClass += " disabled";
         return (
             <div className="card-panel col s4">
                 <div className="card blue-grey darken-1">
                     <div className="card-content white-text">
                     <Modal
-                        actions={[<Button className="modalButton" modal="close" node="button" waves="green">Close</Button>, <Button modal = "enter" node="button" waves="green" onClick={this.handleTextChange}>Enter</Button>]}
+                        actions={[<Button className="modalButton" modal="close" node="button" waves="green">Close</Button>, <Button modal = "close" node="button" waves="green" onClick={this.handleTextChange}>Enter</Button>]}
                         header="Please enter the text for your logo:"
                         id="modal-0"
                         options={{
@@ -125,11 +138,13 @@ class TextEditSidebar extends Component {
                             startingTop: '10%'
                         }}
                         trigger={<Button node="button" className="waves-effect waves-light btn-small">&#9998;</Button>}>
-                        <TextInput defaultValue = {this.props.logo.text} onChange = {this.handleInput} 
+                        <TextInput defaultValue = {this.props.logo.text} onChange = {this.handleInput}
                         />
                     </Modal>
                         <span>  </span>
                         <button className={undoClass} onClick={this.handleUndo}>Undo</button>
+                        <span>  </span>
+                        <button className={redoClass} onClick={this.handleRedo}>Redo</button>
                     </div>
                 </div>
                 <div className="card blue-grey darken-1">
