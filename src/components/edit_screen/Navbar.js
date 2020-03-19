@@ -38,7 +38,7 @@ class Navbar extends React.Component {
           </div>
           <ul id="nav-mobile" className="right hide-on-med-and-down">
             <Modal
-              actions={[<Button className="modalButton" modal="close" node="button" waves="green">No</Button>, <Button modal = "close" node="button" waves="green" onClick={this.handleDelete}>Yes</Button>]}
+              actions={[<Button className="modalButton2" modal="close" node="button" waves="green">No</Button>, <Button modal = "close" node="button" waves="green" onClick={this.handleDelete}>Yes</Button>]}
               header="Are you sure you want to permanently delete this Logo?"
               id="modal-0"
               options={{
@@ -54,7 +54,7 @@ class Navbar extends React.Component {
                 preventScrolling: true,
                 startingTop: '10%'
               }}
-              trigger={<Button node="button" className="delete">&#128465;</Button>}>
+              trigger={<div className="delete" style={ {cursor: "pointer"} }>&#128465;</div>}>
             </Modal>
           </ul>
         </div>
