@@ -35,6 +35,9 @@ class TextEditSidebar extends Component {
                 borderColor: this.props.logo.borderColor, borderRadius: this.props.logo.borderRadius, borderWidth: this.props.logo.borderWidth,
                 padding: this.props.logo.padding, margin: this.props.logo.margin, tempText: ''}, this.completeUserEditing);
         }
+        else{
+            this.reset();
+        }
     }
 
     handleTextColorChange = (event) => {
@@ -142,7 +145,7 @@ class TextEditSidebar extends Component {
                             startingTop: '10%'
                         }}
                         trigger={<Button node="button" className="waves-effect waves-light btn-small">&#9998;</Button>}>
-                        <TextInput placeHolder = {this.props.logo.text} value = {this.state.tempText} onChange = {this.handleInput}
+                        <TextInput placeholder = {this.props.logo.text} value = {this.state.tempText} onChange = {this.handleInput}
                         />
                     </Modal>
                         <span>  </span>
