@@ -6,10 +6,10 @@ class TextEditSidebar extends Component {
     constructor() {
         super();
 
-        var tempText;
         // WE'LL MANAGE THE UI CONTROL
         // VALUES HERE
         this.state = {
+            tempText: '',
             text: "goLogoLo Logo",
             sliderDistance: 24,
             textColor : "#FF0000",
@@ -29,11 +29,12 @@ class TextEditSidebar extends Component {
     }
 
     handleTextChange = () => {
-        console.log("handleTextChange to " + this.tempText);
-        this.setState({ text: this.tempText, textColor: this.props.logo.textColor, fontSize: this.props.logo.fontSize, backgroundColor: this.props.logo.backgroundColor,
-            borderColor: this.props.logo.borderColor, borderRadius: this.props.logo.borderRadius, borderWidth: this.props.logo.borderWidth,
-            padding: this.props.logo.padding, margin: this.props.logo.margin}, this.completeUserEditing);
-
+        var stripped = this.state.tempText.trim();
+        if(stripped.length > 0){
+            this.setState({ text: this.state.tempText, textColor: this.props.logo.textColor, fontSize: this.props.logo.fontSize, backgroundColor: this.props.logo.backgroundColor,
+                borderColor: this.props.logo.borderColor, borderRadius: this.props.logo.borderRadius, borderWidth: this.props.logo.borderWidth,
+                padding: this.props.logo.padding, margin: this.props.logo.margin, tempText: ''}, this.completeUserEditing);
+        }
     }
 
     handleTextColorChange = (event) => {
@@ -97,14 +98,17 @@ class TextEditSidebar extends Component {
     }
 
     handleInput = (event) => {
-        this.tempText = event.target.value;
-        console.log(this.tempText);
-    }
-  
-    handleKeyPress = (event) =>{
-        console.log(event.key)
+        console.log(this.state.tempText);
+        this.setState({tempText: event.target.value, backgroundColor: this.props.logo.backgroundColor, textColor: this.props.logo.textColor, 
+            fontSize: this.props.logo.fontSize, borderRadius: this.props.logo.borderRadius, borderWidth: this.props.logo.borderWidth,
+            padding: this.props.logo.padding, margin: this.props.logo.margin, text: this.props.logo.text, borderColor: this.props.logo.borderColor});
     }
 
+    reset = () =>{
+        this.setState({tempText: '', backgroundColor: this.props.logo.backgroundColor, textColor: this.props.logo.textColor, 
+            fontSize: this.props.logo.fontSize, borderRadius: this.props.logo.borderRadius, borderWidth: this.props.logo.borderWidth,
+            padding: this.props.logo.padding, margin: this.props.logo.margin, text: this.state.text, borderColor: this.props.logo.borderColor});
+    }
 
     render() {
         let undoDisabled = !this.props.canUndo();
@@ -121,7 +125,7 @@ class TextEditSidebar extends Component {
                 <div className="card blue-grey darken-1">
                     <div className="card-content white-text">
                     <Modal
-                        actions={[<Button className="modalButton" modal="close" node="button" waves="green">Close</Button>, <Button modal = "close" node="button" waves="green" onClick={this.handleTextChange}>Enter</Button>]}
+                        actions={[<Button className="modalButton" modal="close" node="button" waves="green" onClick={this.reset}>Close</Button>, <Button modal = "close" node="button" waves="green" onClick={this.handleTextChange}>Enter</Button>]}
                         header="Please enter the text for your logo:"
                         id="modal-0"
                         options={{
@@ -138,7 +142,7 @@ class TextEditSidebar extends Component {
                             startingTop: '10%'
                         }}
                         trigger={<Button node="button" className="waves-effect waves-light btn-small">&#9998;</Button>}>
-                        <TextInput defaultValue = {this.props.logo.text} onChange = {this.handleInput}
+                        <TextInput placeHolder = {this.props.logo.text} value = {this.state.tempText} onChange = {this.handleInput}
                         />
                     </Modal>
                         <span>  </span>
