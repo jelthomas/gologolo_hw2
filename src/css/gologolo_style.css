@@ -78,3 +78,8 @@ h4{
 .value{
   text-align: center;
 }
+
+.pre{
+  white-space: pre;
+  overflow: hidden;
+}

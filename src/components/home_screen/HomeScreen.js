@@ -30,14 +30,16 @@ class HomeScreen extends Component {
             <div className="container row">
                 <div className="col s4">
                     <h3>Recent Work</h3>
-                    <LogoLinks
-                        logos={this.props.logos}                
-                        goToLogoCallback={this.props.goToLogoCallback}
-                    />
+                    <div className="pre">
+                        <LogoLinks
+                            logos={this.props.logos}                
+                            goToLogoCallback={this.props.goToLogoCallback}
+                        />
+                    </div>
                 </div>
                 <div className="col s8">
                     <div id="home_banner_container">
-                        List Maker
+                        Logo Maker
                     </div>
                     <div>
                         <button className="createNew"
